@@ -65,6 +65,7 @@ class CHGNet(nn.Module):
         gMLP_norm: str | None = "layer",  # noqa: N803
         readout_norm: str | None = "layer",
         version: str | None = None,
+        verbose: bool = True,
         **kwargs,
     ) -> None:
         """Initialize CHGNet.
@@ -311,9 +312,9 @@ class CHGNet(nn.Module):
                 ),
                 nn.Linear(in_features=mlp_hidden_dims[-1], out_features=1),
             )
-
-        version_str = f" v{version}" if version else ""
-        print(f"CHGNet{version_str} initialized with {self.n_params:,} parameters")
+        if verbose:
+            version_str = f" v{version}" if version else ""
+            print(f"CHGNet{version_str} initialized with {self.n_params:,} parameters")
 
     @property
     def version(self) -> str | None:
